@@ -1,13 +1,19 @@
 package Pilas;
+import java.util.List;
 import java.util.Stack;
 import java.util.Scanner;
 public class Chat {
     private Stack<String> usuariosConectados;
+    private List<String> usuariosAgregados;
+
 
     public Chat() {
         usuariosConectados = new Stack<>();
     }
+    public void agregarUsuario(String nombreUsuario){
+        usuariosAgregados.add(nombreUsuario);
 
+    }
     public void conectarUsuario(String nombreUsuario) {
         usuariosConectados.push(nombreUsuario);//Coloca un elemneto en la parte superior de la piila
         System.out.println("Usuario '" + nombreUsuario + "' conectado.");
