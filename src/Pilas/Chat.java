@@ -1,39 +1,63 @@
 package Pilas;
+
 import java.util.List;
+import java.util.ArrayList;
+
 import java.util.Stack;
-import java.util.Scanner;
+
 public class Chat {
     private Stack<String> usuariosConectados;
     private List<String> usuariosAgregados;
 
-
     public Chat() {
         usuariosConectados = new Stack<>();
+        usuariosAgregados = new ArrayList<>();
     }
-    public void agregarUsuario(String nombreUsuario){
+
+    public void agregarUsuario(String nombreUsuario) {
         usuariosAgregados.add(nombreUsuario);
-
-    }
-    public void conectarUsuario(String nombreUsuario) {
-        usuariosConectados.push(nombreUsuario);//Coloca un elemneto en la parte superior de la piila
-        System.out.println("Usuario '" + nombreUsuario + "' conectado.");
     }
 
-    public void desconectarUsuario() {
+    public boolean conectarUsuario(String nombreUsuario) {
+        boolean found = false;
+        for (String string : usuariosAgregados) {
+            if (string.equals(nombreUsuario)) {
+                found = true;
+                break;
+            }
+        }
+        if (found) {
+            usuariosConectados.push(nombreUsuario);// Coloca un elemneto en la parte superior de la pila
+            return true;
+        }
+        return false;
+    }
+
+    public boolean desconectarUsuario(String nombreUsuario) {
         if (!usuariosConectados.isEmpty()) {
-            String usuarioDesconectado = usuariosConectados.pop();//elimina un elemnto en la parte superior de la pila
-            System.out.println("Usuario '" + usuarioDesconectado + "' desconectado.");
+            for (String string : usuariosConectados) {
+                if (string.equals(nombreUsuario)) {
+                    usuariosConectados.remove(nombreUsuario);
+                    return true;
+                }
+            }
+            return false;
         } else {
-            System.out.println("No hay usuarios conectados.");
+            return false;
         }
     }
 
     public void mostrarUsuariosConectados() {
-        System.out.println("Usuarios conectados en orden inverso de conexión: " + usuariosConectados);
+        if (!usuariosConectados.isEmpty()) {
+            System.out.println("Usuario conectados");
+            for (String string : usuariosConectados) {
+                System.out.println("\t" + string);
+            }
+            System.out.println("------------------------------");
+        }else{
+            System.out.println("No hay usuarios conectados");
+        }
     }
 
-    public String obtenerNombreUsuario(Scanner scanner) {
-        System.out.print("Ingrese el nombre del usuario que se conecta: ");
-        return scanner.nextLine();
-    }
+    
 }

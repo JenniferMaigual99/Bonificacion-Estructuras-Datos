@@ -7,7 +7,7 @@ public class Atencion {
     Queue<Cliente> colaClientes;
     //Inicializo la cola (FIFO)
     public Atencion() {
-        this.colaClientes = new LinkedList();
+        this.colaClientes = new LinkedList<>();
     }
 
     //Añado un elemento a la cola
